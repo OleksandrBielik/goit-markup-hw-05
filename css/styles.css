@@ -18,7 +18,10 @@
     --container-shadow-color-fourth: #00000029;
     --gradient-color: #2F303A66;
     --icon-color: #AFB1B8;
+    --overlay-activity-color: #2F303ACC;
+    --overlay-color: #00000033;
 }
+
 
 h1,
 h2,
@@ -61,15 +64,29 @@ body {
 header.header-main {
     background-color: var(--white-color);
     display: flex;
-    padding-top: 24px;
-    padding-bottom: 25px;
     border-bottom: 1px solid var(--border-color);
 }
+
 
 header .nav-bar {
     display: flex;
     align-items: center;
 }
+
+
+.nav-bar li > a {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.nav-bar .logo {
+    padding: 0;
+}
+
+
+
 
 header .contacts {
     display: flex;
@@ -88,6 +105,23 @@ header .contacts {
 .nav-bar > li:nth-child(2) {
     margin-left: 93px;
 }
+
+.nav-bar li > a {
+    position: relative;
+}
+
+.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--background-color-active);
+}
+
+
 
 .flex {
     display: flex;
@@ -111,6 +145,7 @@ footer a {
 
 header a {
     font-weight: 500;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 header a.mail,
@@ -150,8 +185,6 @@ footer a:focus {
     color: inherit;
 }
 
-
-
 .portfolio button {
     background-color: var(--background-color-section);
     font-size: 16px;
@@ -159,6 +192,9 @@ footer a:focus {
     line-height: 1.6;
     letter-spacing: 0.03em;
     text-align: center;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio button:hover,
@@ -171,7 +207,8 @@ footer a:focus {
 }
 
 .portfolio button,
-.web-studio button {
+.web-studio button, 
+.close-button {
     cursor: pointer;
     font-family: inherit;
     color: inherit;
@@ -203,11 +240,14 @@ footer a:focus {
 
 .portfolio-product-list li > a {
     display: block;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .portfolio-product-list li > a:hover, 
 .portfolio-product-list li > a:focus {
-    box-shadow: 1px 4px 6px 0px var(--container-shadow-color-fourth), 0px 4px 4px 0px var(--container-shadow-color-third), 0px 1px 1px 0px var(--button-shadow-color-first);
+    box-shadow: 1px 4px 6px 0px var(--container-shadow-color-fourth), 
+    0px 4px 4px 0px var(--container-shadow-color-third), 
+    0px 1px 1px 0px var(--button-shadow-color-first);
 }
 
 .portfolio-product-list .product-title {
@@ -223,6 +263,42 @@ footer a:focus {
     padding: 20px 24px;
     border: 1px solid var(--border-color-product);
     border-top: none;
+}
+
+.portfolio-product-list .thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-product-list .product-overlay > p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    padding: 0 24px;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0.03em;
+    text-align: left;
+    color: var(--white-color);
+}
+
+.portfolio-product-list .product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color-active);
+    opacity: 0.9;
+    transform: translateY(101%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-product-list li > a:hover .product-overlay, 
+.portfolio-product-list li > a:focus .product-overlay {
+    transform: translateY(0);
 }
 
 .portfolio-title {
@@ -247,11 +323,9 @@ footer a:focus {
 
 .web-studio-team li > img,
 .web-studio-activity a > img,
-.portfolio-product-list a > img {
+.portfolio-product-list .thumb > img {
     vertical-align: bottom;
 }
-
-
 
 .team-member-wrapper {
     padding: 30px 32px;
@@ -307,7 +381,7 @@ footer a:focus {
     margin-bottom: 30px;
 }
 
-.web-studio-order button {
+.web-studio-order > button {
     background-color: var(--background-color-active);
     color: var(--white-color);
     font-size: 16px;
@@ -364,6 +438,30 @@ footer a:focus {
     justify-content: space-between;
 }
 
+.web-studio-activity li > a {
+    display: block;
+    position: relative;
+}
+
+.web-studio-activity .overlay-activity {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--overlay-activity-color);
+}
+
+.overlay-activity > p {
+    padding: 27px 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.14;
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--white-color);
+}
+
 .web-studio-team {
     
     justify-content: space-between;
@@ -395,12 +493,14 @@ footer a:focus {
     height: 44px;
     color: var(--icon-color);
     border-radius: 50%;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .team-member-socials-wrapper li > a:hover, 
 .team-member-socials-wrapper li > a:focus {
     color: var(--white-color);
-    background-color: var(--background-color-active)
+    background-color: var(--background-color-active);
 }
 
 .team-member-socials-wrapper a > svg, 
@@ -421,6 +521,7 @@ footer a:focus {
 .web-studio-clients li > a {
     display: block;
     color: var(--icon-color);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .web-studio-clients svg {
@@ -482,11 +583,67 @@ footer .mail {
 .social-links li > a {
     color: var(--white-color);
     background-color: var(--white-color-opacity);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .social-links li > a:hover,
 .social-links li > a:focus {
     background-color: var(--background-color-active)
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-color);
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: none;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 528px;
+    min-height: 581px;
+    border-radius: 4px;
+    background-color: var(--white-color);
+    box-shadow: 0px 2px 1px 0px var(--container-shadow-color-first), 
+    0px 1px 1px 0px var(--container-shadow-color-second), 
+    0px 1px 3px 0px var(--button-shadow-color-first);
+    transform-origin: center;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden .modal{
+    transform-origin: center;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+button.close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    margin-left: auto;
+    padding: 0;
+    background-color: inherit;
+}
+
+.close-button > svg {
+    border: 1px solid var(--button-shadow-color-third);
+    border-radius: 50%;
+    vertical-align: bottom;
 }
 
 

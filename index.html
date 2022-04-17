@@ -20,7 +20,7 @@
                 <nav>
                     <ul class="nav-bar">
                         <li><a class="logo" href="./index.html"><span>Web</span>Studio</a></li>
-                        <li><a href="./index.html">Студия</a></li>
+                        <li><a class="is-active" href="./index.html">Студия</a></li>
                         <li><a href="./portfolio.html">Портфолио</a></li>
                         <li><a href="#">Контакты</a></li>
                     </ul>
@@ -51,7 +51,7 @@
                     <div class="container">
                         <div class="web-studio-order">
                             <h1>Эффективные решения для вашего бизнеса</h1>
-                            <button type="button">Заказать услугу</button>
+                            <button type="button" data-modal-open>Заказать услугу</button>
                         </div>
                     </div>
                 </div>
@@ -109,16 +109,25 @@
                         <li>
                             <a href="#">
                                 <img src="images/coding.jpg" alt="Разрабатываем приложения с 0" width="370">
+                                <div class="overlay-activity">
+                                    <p>Десктопные приложения</p>
+                                </div>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 <img src="images/mobile.jpg" alt="Адаптируем приложения под любые мобильные устройства" width="370">
+                                <div class="overlay-activity">
+                                    <p>Десктопные приложения</p>
+                                </div>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 <img src="images/touchpad.jpg" alt="Адаптируем приложения под любые тачпад устройства" width="370">
+                                <div class="overlay-activity">
+                                    <p>Десктопные приложения</p>
+                                </div>
                             </a>
                         </li>
                     </ul>
@@ -376,5 +385,15 @@
                 </div>
             </div>
         </footer>
+        <div class="backdrop is-hidden" data-modal>
+            <div class="modal">
+                <button class="close-button" type="button" data-modal-close>
+                    <svg width="30" height="30">
+                        <use href="./images/svg/icons.svg#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <script src="./js/modal.js"></script>
     </body>
 </html>
